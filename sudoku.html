@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Arkadiusz Bulski personal page</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+        @font-face { font-family: Ubuntu; src: url('fonts/Ubuntu-R.ttf'); }
+        @font-face { font-family: UbuntuMedium; src: url('fonts/Ubuntu-M.ttf'); }
+        p {
+            font-family: Ubuntu;
+        }
+        a {
+            font-family: Ubuntu;
+            color: Blue;
+        }
+        h3 {
+            font-family: UbuntuMedium;
+        }
+        td {
+            padding: 5px;
+        }
+        #layout{
+            width: 800px;
+            position: absolute;
+            left: 50%;
+            top: 0;
+            margin-left: -400px;
+        }
+    </style>
+  </head>
+  <body>
+      <div id="layout">
+
+          <p style="text-align: center;"><a href="index.html">Click to go back</a></p>
+
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <p><b>Sudoku puzzles recognition and solving</b> is my Bachelor's thesis. I used a myriad of image processing techniques to automate analysis of images and extract information. You run the attached program on a laptop. Take a sudoku puzzle, like one of those printed in newspapers or puzzle books. Show it to the webcam. For example, here is one puzzle picture taken. </p>
+            </div>
+          </div>
+
+          <br>
+          <div style="text-align: center">
+              <img src="puzzle1.png" alt="puzzle1.png" width="60%">
+          </div>
+
+
+          <br>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <p>Thresholding is the first phase. It means each pixel gets classified as either black or white. New threshold is computed for each pixel, independently, by averaging the neighboring pixels and adding some constant. This way, lights and shadows do not produce artifacts because borders need to significantly stand out from background no matter how bright or dark background is. </p>
+            </div>
+          </div>
+
+          <br>
+          <div style="text-align: center">
+              <img src="puzzle2.png" alt="puzzle2.png" width="60%">
+          </div>
+
+          <br>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <p>Boldifying is the second phase. Pixels that are surrounded by several (many enough) black pixels get classified as black. This way both borders and some thin layer of pixels around borders turn black. </p>
+            </div>
+          </div>
+
+          <br>
+          <div style="text-align: center">
+              <img src="puzzle3.png" alt="puzzle3.png" width="60%">
+          </div>
+
+          <br>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <p>Blob extraction is the third phase. Black pixels that are next to one another are grouped into components (or so called blobs). The component that has most pixels becomes the king of the hill and purges other components from the image. Only the biggest component remains in the end. </p>
+            </div>
+          </div>
+
+          <br>
+          <div style="text-align: center">
+              <img src="puzzle4.png" alt="puzzle4.png" width="60%">
+          </div>
+
+          <br>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <p>Edges are found by using an adaptive probabilistic Hough transform, which for us just means, we put a grid of pixels in and get some geometric lines (segments) back. Unfortunately not only the four outer borders get tagged but also many other lines within the puzzle. So we take ends of all the lines and pick those that are closest to corners of the image. This is how we end up with four green-rectangles below.  </p>
+            </div>
+          </div>
+
+          <br>
+          <div style="text-align: center">
+              <img src="puzzle5.png" alt="puzzle5.png" width="60%">
+          </div>
+
+          <br>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <p>Perspective reversal is the next phase. What you see on previous image is a projection of a rectangle onto a three dimensional flat surface. We need to stretch and twist the image so we end up with the puzzle spanning entire image. Once digits are uniformly spaced throughout the image they can be recognized using some sort of OCR or neural networks.  </p>
+            </div>
+          </div>
+
+          <br>
+          <div style="text-align: center">
+              <img src="puzzle6.png" alt="puzzle6.png" width="40%">
+          </div>
+
+          <br>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <p>Once sudoku was numerically solved, new digits are applied in the same, uniformly spaced way onto a blank white image. These new digits will be merged with original image. Before merging can happen however, perspective of both layers must match. Image with new digits gets stretched the same way original image was stretched into a uniformly spaced grid, just in reverse.   </p>
+            </div>
+          </div>
+
+          <br>
+          <div style="text-align: center">
+              <img src="puzzle8.png" alt="puzzle8.png" width="40%">
+          </div>
+
+<!--
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <p>Final result is show original image merged with new digits (the solution).  </p>
+            </div>
+          </div>
+
+          <div style="text-align: center">
+              <img src="puzzle9.png" alt="puzzle9.png" width="60%">
+          </div>
+-->
+          <br>
+          <br>
+          <br>
+
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
